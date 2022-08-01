@@ -65,6 +65,13 @@
                     </div>
                 </li>
 
+                <li class="@if(request()->routeIs('admin.roles.index')) menuitem-active @endif">
+                    <a href="{{ route('admin.roles.index') }}">
+                        <i class="dripicons-network-3"></i>
+                        <span> Role & Permission </span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div class="clearfix"></div>

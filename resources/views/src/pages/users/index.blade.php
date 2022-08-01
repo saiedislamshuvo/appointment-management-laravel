@@ -22,12 +22,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped dt-responsive nowrap w-100" id="sliders-table">
+                        <table class="table table-striped dt-responsive nowrap w-100" id="users-table">
                             <thead>
                                 <tr>
                                     <th data-priority="1">Id</th>
                                     <th data-priority="3">Name</th>
                                     <th data-priority="3">Email</th>
+                                    <th data-priority="5">Roles</th>
                                     <th>Created At</th>
                                     <th data-priority="4">Action</th>
                                 </tr>
@@ -43,7 +44,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#sliders-table').DataTable({
+            $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -59,6 +60,11 @@
                     data: 'email',
                     name: 'email',
                     orderable: false
+                }, {
+                    data: 'roles',
+                    name: 'roles',
+                    orderable: false,
+                    searchable: false
                 }, {
                     data: 'created_at',
                     name: 'created_at'
