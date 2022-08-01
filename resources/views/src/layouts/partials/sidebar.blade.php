@@ -15,12 +15,19 @@
                     </a>
                 </li>
 
+                <li class="@if(request()->routeIs('appointments.index')) menuitem-active @endif">
+                    <a href="{{ route('appointments.index') }}">
+                        <i class="dripicons-clock"></i>
+                        <span> Appointments </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Core</li>
 
                 <li class="@if(request()->routeIs('contacts.index')) menuitem-active @endif">
                     <a href="{{ route('contacts.index') }}">
                         <i class="dripicons-user-group"></i>
-                        <span class="badge bg-success rounded-pill float-end">1</span>
+                        <span class="badge bg-success rounded-pill float-end">.</span>
                         <span> Contacts </span>
                     </a>
                 </li>
