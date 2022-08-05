@@ -36,7 +36,7 @@
     <div class="col-md-12 mt-2">
         <div class="form-check">
             <input type="checkbox" name="status" class="form-check-input" id="appointment-status"
-                @if ($appointment->status ?? true) checked @endif>
+                @if ($appointment->status ?? false) checked @endif>
             <label class="form-check-label" for="appointment-status">Status</label>
         </div>
     </div>

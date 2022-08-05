@@ -29,36 +29,16 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">5899</span>
+                                <h3 class="text-dark mt-1">
+                                    {{ $appointment_statistics['today'] }}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">Item</p>
+                                <p class="text-muted mb-1 text-truncate">Today</p>
                             </div>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
-
-        <div class="col-md-6 col-xl-3">
-            <div class="widget-rounded-circle card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-soft-success">
-                                <i class="fe-shopping-cart font-22 avatar-title text-success"></i>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span>
-                                </h3>
-                                <p class="text-muted mb-1 text-truncate">Item</p>
-                            </div>
-                        </div>
-                    </div> <!-- end row-->
-                </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+            </div>
+        </div>
 
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
@@ -71,15 +51,16 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%
+                                <h3 class="text-dark mt-1">
+                                    {{ $appointment_statistics['last_30_days'] }}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">Item</p>
+                                <p class="text-muted mb-1 text-truncate">Last 30 Days</p>
                             </div>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+            </div>
+        </div>
 
         <div class="col-md-6 col-xl-3">
             <div class="widget-rounded-circle card">
@@ -92,14 +73,26 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end">
-                                <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k
+                                <h3 class="text-dark mt-1">
+                                    {{ $appointment_statistics['total'] }}
                                 </h3>
-                                <p class="text-muted mb-1 text-truncate">Item</p>
+                                <p class="text-muted mb-1 text-truncate">Total</p>
                             </div>
                         </div>
-                    </div> <!-- end row-->
+                    </div>
                 </div>
-            </div> <!-- end widget-rounded-circle-->
-        </div> <!-- end col-->
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Today Appointment</h4>
+            </div>
+        </div>
+    </div>
+    @include('src.pages.appointment.partials.table', [
+        'appointmentRoute' => route('dashboard'),
+    ])
 @endsection

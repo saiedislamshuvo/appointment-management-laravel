@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Appointment;
 
 use App\Models\Appointment\Appointment;
+use App\Http\Repositories\AppointmentRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
 
 class AppointmentController extends Controller
 {
+    private $appointmentRepository;
+
+    public function __construct(AppointmentRepository $appointmentRepository) {
+        $this->appointmentRepository = $appointmentRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,36 +23,7 @@ class AppointmentController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of(Appointment::get())
-                ->addColumn('action', function($entity) {
-                    return view('src.partials.table.action', [
-                        'checkedRoute' => route('appointments.visited', [
-                            'appointment' => $entity->id, 
-                            'status' => true,
-                        ]),
-                        'editRoute' => route('appointments.edit', ['appointment' => $entity->id]),
-                        'destoryWarningText' => 'Are you sure, Delete this appointments?',
-                        'destroyRoute' => route('appointments.destroy', ['appointment' => $entity->id]),
-                    ]);
-                })
-                ->addColumn('visit', function ($entity) {
-                    return view('src.partials.table.date')->with('date', $entity->datetime);
-                })
-                ->addColumn('status', function($entity) {
-                    if($entity->status) {
-                        $status = 'Visited';
-                        $badge = 'bg-success';
-                    } else {
-                        $status = 'Not Visited';
-                        $badge = 'bg-danger';
-                    }
-                    return '<span class="badge '. $badge .'">'. $status .'</span>';
-                })
-                ->rawColumns(['action', 'visit', 'status'])
-                ->editColumn('created_at', function ($entity) {
-                    return view('src.partials.table.date')->with('date', $entity->created_at);
-                })
-                ->make(true);
+            return $this->appointmentRepository->get_appointment();
         }
         return view('src.pages.appointment.index');
     }
@@ -158,7 +135,7 @@ class AppointmentController extends Controller
             Appointment::findorfail($id)->delete();
             return redirect()->route('appointments.index')->with('message', 'Appointment Deleted Successfully!');
         } catch(\Exception $e) {
-            return redirect()->back()->with('message-error', 'Something went wrong!');
+            return redirect()->route('appointments.index')->with('message-error', 'Something went wrong!');
         }
     }
 }
